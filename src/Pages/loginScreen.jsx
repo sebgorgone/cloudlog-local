@@ -8,7 +8,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 function LoginScreen () {
 
-   const domain = 'http://localhost:5173'
+   const domain = 'https://sebgorgone.github.io/cloudlog-local/#'
    const nav = useNavigate();
 
    const [ident, setIdent] = useState("");

@@ -298,20 +298,20 @@ function LogInputWidget(props) {
    }
   const planeList = planes.map((plane, index) => 
     <div key={index} style={listDiv}>
-      <p style={rlStyle}>{plane === defaultPlane && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src="/favorite-svgrepo-com.svg" /></span>}{plane}</p>
-      {plane !== newJumpAircraft ? <button type="button" style={nestedButton} onClick={() => setNewJumpAircraft(plane)}>set</button> : <img src='/check-svgrepo-com.svg' style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
+      <p style={rlStyle}>{plane === defaultPlane && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src={`${import.meta.env.BASE_URL}favorite-svgrepo-com.svg`} /></span>}{plane}</p>
+      {plane !== newJumpAircraft ? <button type="button" style={nestedButton} onClick={() => setNewJumpAircraft(plane)}>set</button> : <img src={`${import.meta.env.BASE_URL}check-svgrepo-com.svg`} style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
     </div>
   );
   const rigList = rigs.map((rig, index) => 
     <div key={index} style={listDiv}>
-      <p style={rlStyle}>{rig === defaultRig && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src="/favorite-svgrepo-com.svg" /></span>}{rig}</p>
-      {rig !== newJumpRig ? <button type="button" style={nestedButton} onClick={() => setNewJumpRig(rig)}>set</button> : <img src='/check-svgrepo-com.svg' style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
+      <p style={rlStyle}>{rig === defaultRig && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src={`${import.meta.env.BASE_URL}favorite-svgrepo-com.svg`} /></span>}{rig}</p>
+      {rig !== newJumpRig ? <button type="button" style={nestedButton} onClick={() => setNewJumpRig(rig)}>set</button> : <img src={`${import.meta.env.BASE_URL}check-svgrepo-com.svg`} style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
     </div>
   );
   const DZList = DZs.map((DZ, index) => 
     <div key={index} style={listDiv}>
-      <p style={rlStyle}>{DZ === defaultDZ && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src="/favorite-svgrepo-com.svg" /></span>}{DZ}</p>
-      {DZ !== newJumpDZ ? <button type="button" style={nestedButton} onClick={() => setNewJumpDZ(DZ)}>set</button> : <img src='/check-svgrepo-com.svg' style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
+      <p style={rlStyle}>{DZ === defaultDZ && <span><img style={{ width: '1em', marginRight: ".5em", border: 'none' }} src={`${import.meta.env.BASE_URL}favorite-svgrepo-com.svg`} /></span>}{DZ}</p>
+      {DZ !== newJumpDZ ? <button type="button" style={nestedButton} onClick={() => setNewJumpDZ(DZ)}>set</button> : <img src={`${import.meta.env.BASE_URL}check-svgrepo-com.svg`} style={{aspectRatio: "1/1", width: "1.8em", marginRight: "1.5em"}}/>}
     </div>
   );
   //rendered lists ^^
@@ -1410,7 +1410,7 @@ const storeJump = async (newJumpNum, newJumpDate, newJumpDZ, newJumpAircraft, ne
 
       {/* title */}
       <div style={{ display: "flex", justifyContent: "center", padding: ".5em", background: pallette[3], borderTopLeftRadius:".7em", borderTopRightRadius:".7em" }}>
-        <img style={{width: '5.5em', height: '5.5em', paddingTop: ".5em"}} src="/cloudLogIconWhite.svg" />
+        <img style={{width: '5.5em', height: '5.5em', paddingTop: ".5em"}} src={`${import.meta.env.BASE_URL}cloudLogIconWhite.svg`} />
         <h1 style={{fontFamily: "L1", padding: ".2em", color: pallette[0],fontSize: "2em"}}>Add Jump</h1>
       </div>
 
