@@ -86,7 +86,7 @@ function LoginScreen () {
       <div style={backdrop}>
 
       <div style={{justifyContent: "center", display: "flex"}}>
-         <img style={{padding: "3em", width: "45em", paddingBottom: "0"}}src={`${import.meta.env.BASE_URL}CloudLogBannerWhite.svg/`} />
+         <img style={{padding: "3em", width: "45em", paddingBottom: "0"}}src={`${import.meta.env.BASE_URL}CloudLogBannerWhite.svg`} />
       </div>
       
       <form style={loginContainer} >
