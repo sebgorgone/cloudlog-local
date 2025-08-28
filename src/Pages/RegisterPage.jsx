@@ -124,7 +124,7 @@ function RegisterPage () {
 
    return(
       <div>
-         <img style={{aspectRatio: "1/1", width: "4em", marginRight: "2em", position: "absolute",}} src="/cloudLogBoxLogo-white.svg"/>
+         <img style={{aspectRatio: "1/1", width: "4em", marginRight: "2em", position: "absolute",}} src="cloudLogBoxLogo-white.svg"/>
 
          <div style={{display: "flex", justifyContent: "center", background: pallette[3]}}>
             <h1 style={title}>Create New Account</h1>

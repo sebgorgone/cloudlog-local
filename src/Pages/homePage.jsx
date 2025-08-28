@@ -387,7 +387,7 @@ function HomePage(props) {
 
          <div style={sidebarStyle}>
 
-            <img style={{width: '3em', height: '3em', paddingTop: "1em"}} src="/cloudLogBoxLogo-white.svg" />
+            <img style={{width: '3em', height: '3em', paddingTop: "1em"}} src="cloudLogBoxLogo-white.svg" />
 
             <div style={{marginTop: "2.2em"}}>
 
@@ -396,7 +396,7 @@ function HomePage(props) {
                   style={{borderRadius: "50%", border: "solid .2em", borderColor: pallette[2], background: pallette[0]}}
                   onClick={handleNavToAdd}
                >
-                     <img style={{width: '1.9em', height: '1.8em',padding: ".25em", paddingTop: ".37em"}} src="/new-indicator-svgrepo-com.svg" />
+                     <img style={{width: '1.9em', height: '1.8em',padding: ".25em", paddingTop: ".37em"}} src="new-indicator-svgrepo-com.svg" />
                </button>
 
 
@@ -405,7 +405,7 @@ function HomePage(props) {
                   style={{borderRadius: "50%", border: "solid .2em", borderColor: pallette[2], marginTop: "1.5em", background: pallette[0]}}
                   onClick={handleNavToLedg}
                >
-                     <img style={{width: '1.8em', height: '1.8em', padding: ".3em"}} src="/list-svgrepo-com.svg" />
+                     <img style={{width: '1.8em', height: '1.8em', padding: ".3em"}} src="list-svgrepo-com.svg" />
                </button>
 
 
@@ -414,7 +414,7 @@ function HomePage(props) {
                   style={{borderRadius: "50%", border: "solid .2em", borderColor: pallette[2], marginTop: "1.5em", background: pallette[0]}}
                   onClick={handleNavToStats}
                >
-                     <img style={{width: '2em', height: '2em', padding: ".3em"}} src="/stats-svgrepo-com(2).svg" />
+                     <img style={{width: '2em', height: '2em', padding: ".3em"}} src="stats-svgrepo-com(2).svg" />
                </button>
                
                
@@ -423,7 +423,7 @@ function HomePage(props) {
                   style={{borderRadius: "50%", border: "solid .2em", borderColor: pallette[2], marginTop: "1.5em", background: pallette[0]}}
                   onClick={handleNavToDownload}
                >
-                     <img style={{width: '2em', height: '2em', padding: ".2em"}} src="/download-file-1-svgrepo-com(1).svg" />
+                     <img style={{width: '2em', height: '2em', padding: ".2em"}} src="download-file-1-svgrepo-com(1).svg" />
                </button>
 
 
@@ -432,7 +432,7 @@ function HomePage(props) {
                   style={{borderRadius: "50%", border: "solid .2em", borderColor: pallette[2], marginTop: "1.5em", background: pallette[0]}}
                   onClick={handleNavToSettings}
                >
-                     <img style={{width: '1.8em', height: '1.8em', padding: ".4em"}} src="/settings-gear-part-2-svgrepo-com.svg" />
+                     <img style={{width: '1.8em', height: '1.8em', padding: ".4em"}} src="settings-gear-part-2-svgrepo-com.svg" />
                </button>
                
                

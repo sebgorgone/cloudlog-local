@@ -1104,7 +1104,7 @@ function StatsPage(props) {
                  paddingTop: '2em',
                  margin: 'auto'
                }}
-               src="/CloudLogBannerWhite.svg"
+               src="CloudLogBannerWhite.svg"
             />
          </div>
          

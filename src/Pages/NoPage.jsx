@@ -42,14 +42,14 @@ function NoPage () {
    return (
       <div style={shell}>
 
-         <img style={{width: '16em', aspectRatio: '4/1', paddingTop: ".1em", marginRight: ".5em"}} src="/CloudLogBannerWhite.svg" />
+         <img style={{width: '16em', aspectRatio: '4/1', paddingTop: ".1em", marginRight: ".5em"}} src="CloudLogBannerWhite.svg" />
          
          <div style={{display: "flex", flexFlow: "column", alignItems: "center", padding: "0"}}>
-            <img style={{aspectRatio: "4/4", height: "40vh"}} src="/cloudlog404White.svg" />
+            <img style={{aspectRatio: "4/4", height: "40vh"}} src="cloudlog404White.svg" />
             <p style={{fontFamily: "L1",fontSize: "6em", color: pallette[0], padding: "0", margin: "0"}}>404</p>
             <p style={titleStyle}>Page not found</p>
          </div>
-         <button style={aStyle} onClick={() => nav('/login')}><img style={{width: '1.5em', height: '1.5em', paddingTop: ".1em", marginRight: ".5em"}} src="/CloudLogLogo.svg" />Go To Login →</button>
+         <button style={aStyle} onClick={() => nav('/login')}><img style={{width: '1.5em', height: '1.5em', paddingTop: ".1em", marginRight: ".5em"}} src="CloudLogLogo.svg" />Go To Login →</button>
       </div>
    )
 }

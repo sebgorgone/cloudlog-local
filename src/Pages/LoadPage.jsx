@@ -6,7 +6,7 @@ let svgImg;
 
 function LoadPage () {
   const preload = (p5) => {
-    svgImg = p5.loadImage('/cloudLogIconWhite.png');
+    svgImg = p5.loadImage('cloudLogIconWhite.png');
   };
 
     let xPoint1;

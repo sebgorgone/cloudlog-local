@@ -15,9 +15,9 @@ function SettingsPage(props) {
 
    const jumps = props.jumps;
 
-   const favoriteIcon = <img style={{width: "1.5em", marginLeft: ".575em"}} src="/favorite-svgrepo-com.svg" />
+   const favoriteIcon = <img style={{width: "1.5em", marginLeft: ".575em"}} src="favorite-svgrepo-com.svg" />
 
-   const backIcon = <img style={{width: ".8em", aspectRatio: "1 /1", paddingRight: "1em"}} src="/back-arrow-to-first-track-svgrepo-com(1).svg" />
+   const backIcon = <img style={{width: ".8em", aspectRatio: "1 /1", paddingRight: "1em"}} src="back-arrow-to-first-track-svgrepo-com(1).svg" />
 
    //state
 
@@ -747,7 +747,7 @@ function SettingsPage(props) {
                   >
                     <img
                       style={{ width: '1em', margin: 0, border: 'none' }}
-                      src="/favorite-off-svgrepo-com.svg"
+                      src="favorite-off-svgrepo-com.svg"
                       alt="mark favorite"
                     />
                   </button>
@@ -775,7 +775,7 @@ function SettingsPage(props) {
                   >
                     <img
                       style={{ width: '1em', margin: 0, border: 'none' }}
-                      src="/favorite-off-svgrepo-com.svg"
+                      src="favorite-off-svgrepo-com.svg"
                       alt="mark favorite"
                     />
                   </button>
@@ -804,7 +804,7 @@ function SettingsPage(props) {
                   >
                     <img
                       style={{ width: '1em', margin: 0, border: 'none' }}
-                      src="/favorite-off-svgrepo-com.svg"
+                      src="favorite-off-svgrepo-com.svg"
                       alt="mark favorite"
                     />
                   </button>
@@ -1257,7 +1257,7 @@ function SettingsPage(props) {
           paddingRight: '8%',
           margin: '0'
         }}
-        src="/CloudLogBannerWhite.svg"
+        src="CloudLogBannerWhite.svg"
       />
       {editAJump ? <h1 style={headerStyle}>Edit Jump Number: {editedJump.jump_num}</h1> : <h1 style={headerStyle}>{!jumpEditPage ? 'Settings' : 'Edit Jumps'}</h1>}
 

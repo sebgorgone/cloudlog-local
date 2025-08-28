@@ -11,7 +11,7 @@ function WelcomeForm (props) {
    //environment
    const pallette = getPallette();
 
-   const favoriteIcon = <img style={{width: "1.5em", marginRight: "1.15em"}} src="/favorite-svgrepo-com.svg" />
+   const favoriteIcon = <img style={{width: "1.5em", marginRight: "1.15em"}} src="favorite-svgrepo-com.svg" />
 
    //state
 
@@ -316,21 +316,21 @@ function WelcomeForm (props) {
   const planeList = planes.map((plane, index) => 
     <div key={index} style={listDiv}>
     <p style={listStyle}>{plane}</p>
-    {plane !== 'No saved planes yet' && plane !== defaultAircraft ? <button type="button" style={favoriteButtonNull} onClick={() => handleSetFavoriteAircraft(plane)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="/favorite-off-svgrepo-com.svg" /></button> : plane !== 'No saved planes yet' && favoriteIcon}
+    {plane !== 'No saved planes yet' && plane !== defaultAircraft ? <button type="button" style={favoriteButtonNull} onClick={() => handleSetFavoriteAircraft(plane)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="favorite-off-svgrepo-com.svg" /></button> : plane !== 'No saved planes yet' && favoriteIcon}
   </div>
   );
 
   const rigList = rigs.map((rig, index) => 
     <div key={index} style={listDiv}>
       <p style={listStyle}>{rig}</p>
-      {rig !== 'No saved rigs yet' && rig !== defaultRig ? <button type="button" style={favoriteButtonNull} onClick={() => handleSetFavoriteRig(rig)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="/favorite-off-svgrepo-com.svg" /></button> : rig !== 'No saved rigs yet' && favoriteIcon}
+      {rig !== 'No saved rigs yet' && rig !== defaultRig ? <button type="button" style={favoriteButtonNull} onClick={() => handleSetFavoriteRig(rig)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="favorite-off-svgrepo-com.svg" /></button> : rig !== 'No saved rigs yet' && favoriteIcon}
     </div>
   );
 
   const DZList = DZs.map((DZ, index) => 
     <div key={index} style={listDiv}>
       <p style={listStyle}>{DZ}</p>
-      {DZ !== 'No saved dropzones yet' && DZ !== defaultDZ ? <button type='button' style={favoriteButtonNull} onClick={() => handleSetFavoriteDZ(DZ)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="/favorite-off-svgrepo-com.svg" /></button> : DZ !== 'No saved dropzones yet' && favoriteIcon}
+      {DZ !== 'No saved dropzones yet' && DZ !== defaultDZ ? <button type='button' style={favoriteButtonNull} onClick={() => handleSetFavoriteDZ(DZ)}><img style={{ width: '1.5em', margin: "0", border: "none"}} src="favorite-off-svgrepo-com.svg" /></button> : DZ !== 'No saved dropzones yet' && favoriteIcon}
     </div>
   );
 

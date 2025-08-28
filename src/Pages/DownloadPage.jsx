@@ -25,7 +25,7 @@ function DownloadPage(props) {
    return(
       <div style={shell}>
          <br />
-         <img style={{width: '24em', aspectRatio: '4/1', paddingTop: "1em", marginRight: ".5em"}} src="/CloudLogBannerWhite.svg" />
+         <img style={{width: '24em', aspectRatio: '4/1', paddingTop: "1em", marginRight: ".5em"}} src="CloudLogBannerWhite.svg" />
          
          <div>
             <br />

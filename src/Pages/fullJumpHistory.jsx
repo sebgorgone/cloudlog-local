@@ -219,7 +219,7 @@ const tagsRoute = async (array) => {
                <button 
                   title={!showAddWidget ? "Add New Jumps" : "Hide 'Add Jump' menu"}
                   style={newJumpButton} onClick={toggleWidgetDropdown}>
-                     <img style={{width: '2em', height: '2em', paddingRight: "1.3em"}} src="/cloudLogIconWhite.svg" />{!showAddWidget ? 'Add New Jumps' : 'Hide Add Menu'}
+                     <img style={{width: '2em', height: '2em', paddingRight: "1.3em"}} src="cloudLogIconWhite.svg" />{!showAddWidget ? 'Add New Jumps' : 'Hide Add Menu'}
                </button>
             </div>
             
