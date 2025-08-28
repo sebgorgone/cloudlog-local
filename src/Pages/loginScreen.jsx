@@ -2,25 +2,20 @@ import {useState} from 'react';
 import {getPallette} from "../logInputWidget";
 import '../style/loginScreen.css';
 import { useNavigate, Navigate } from "react-router-dom";
-import { useAuth } from '../contexts/authContext';
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
 
 
 function LoginScreen () {
 
-   const svr = import.meta.env.VITE_SVR_URL;
-
-   const domain = 'https://mycloudlog.netlify.app';
-
+   const domain = 'http://localhost:5173'
    const nav = useNavigate();
-   const { login, user } = useAuth();
 
    const [ident, setIdent] = useState("");
    const [psky, setPsky] = useState("");
-   if (user) {
-      return <Navigate to="/" replace />
-   }
+   // if (user) {
+   //    return <Navigate to="/" replace />
+   // }
    //pallette v
    const pallette = getPallette();
 
@@ -78,46 +73,6 @@ function LoginScreen () {
 
    //handlers vv
 
-   const handleLoginSuccess = (data) => {
-      login(data);
-      nav('/');
-
-   }
-
-
-  const handleLogin = async () => {
-    try {
-      const response = await fetch(`${svr}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: ident, password: psky }),
-      });
-
-      const contentType = response.headers.get('content-type');
-      let returnedData;
-      if (contentType && contentType.includes('application/json')) {
-        returnedData = await response.json();
-      } else {
-        returnedData = await response.text();
-      }
-
-      if (response.ok) {
-        
-        console.log('✅ Login successful, got token');
-        handleLoginSuccess({
-          token: returnedData.token,
-          user: returnedData.user
-        });
-      } else {
-        console.error('❌ Login failed:');
-        alert(returnedData.error || returnedData.message || 'login failed')
-      }
-    } catch (err) {
-      console.error('🔥 Server error:', err);
-      alert('Cannot connect to server. Try again later.');
-    }
-  };
-
    function handleIdentField(e) {
       setIdent(e.target.value);
    }
@@ -127,11 +82,6 @@ function LoginScreen () {
    }
    
 
-   function handleFormSubmit(e) {
-      e.preventDefault();
-      handleLogin();
-}
-
    return(
       <div style={backdrop}>
 
@@ -139,7 +89,7 @@ function LoginScreen () {
          <img style={{padding: "3em", width: "45em", paddingBottom: "0"}}src="/CloudLogBannerWhite.svg"/>
       </div>
       
-      <form style={loginContainer} onSubmit={handleFormSubmit}>
+      <form style={loginContainer} >
          <h3 style={headerStyle}>Please Log In</h3>
          <input 
             className="loginInput"
@@ -157,15 +107,15 @@ function LoginScreen () {
             onChange={handlePskyField}
          />
          <div style={{display: "flex", justifyContent: "space-evenly", alignItems: "center", marginBottom: "3vh"}}>
-            <button type="submit" style={loginButton}>Log In</button>
+            <button type="submit" style={loginButton} onClick={e => {e.preventDefault(); nav('/'); ident !== '' && localStorage.setItem('user', JSON.stringify({name: ident, id: 1}))}}>Log In</button>
 
-            {/* <a 
+            <a 
               className="registerLink"
               style={signupPageButton}
               href={`${domain}/register`}
             >
               Create New Account
-            </a> */}
+            </a>
 
          </div>
          

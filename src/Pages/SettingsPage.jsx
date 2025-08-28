@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import {getPallette} from "../logInputWidget";
 import '../style/loginScreen.css';
-import { useAuth } from '../contexts/authContext';
 import EditJumpWidget from '../components/EditJumpWidget';
 import JumpWidgetDisp from '../components/JumpWidgetDisp';
 import JumpWidgetDel from '../components/JumpWidgetDel';
@@ -15,8 +14,6 @@ function SettingsPage(props) {
    const user = props.user;
 
    const jumps = props.jumps;
-
-   const { updateUsername } = useAuth();
 
    const favoriteIcon = <img style={{width: "1.5em", marginLeft: ".575em"}} src="/favorite-svgrepo-com.svg" />
 

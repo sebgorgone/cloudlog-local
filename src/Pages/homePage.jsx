@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import {getUser, useAuth} from '../contexts/authContext.jsx'
 import {getPallette} from "../logInputWidget.jsx"
 import FullJumpLedge from './fullJumpHistory.jsx'
 import WelcomePage from './WelcomePage.jsx'
@@ -9,6 +8,7 @@ import SettingsPage from './SettingsPage.jsx'
 import SearchedList from './SearchedList.jsx'
 import LogInputWidget from '../logInputWidget.jsx'
 import LoadPage from './LoadPage.jsx'
+import { useNavigate } from 'react-router-dom'
 
 
 function HomePage(props) {
@@ -17,30 +17,45 @@ function HomePage(props) {
 
    //environment variables
 
-   const { logout } = useAuth();
-
    const pallette = getPallette()
 
-   const user = getUser();
+   const nav = useNavigate();
+
 
    //user info
 
-   const [defaultRig, setDefaultRig] = useState();
+   const [defaultRig, setDefaultRig] = useState(() => {
+      const stored = localStorage.getItem('defaultRig');
+      return stored ? JSON.parse(stored) : null; 
+   });
 
-   const [defaultAircraft, setDefaultAircraft] = useState();
+   const [defaultAircraft, setDefaultAircraft] = useState(() => {
+      const stored = localStorage.getItem('defaultAircraft');
+      return stored ? JSON.parse(stored) : null; 
+   });
 
-   const [defaultDZ, setDefaultDZ] = useState();
 
-   const [planes, setPlanes] = useState([]);
+   const [defaultDZ, setDefaultDZ] = useState(() => {
+      const stored = localStorage.getItem('defaultDZ');
+      return stored ? JSON.parse(stored) : null; 
+   });
 
-   const [rigs, setRigs] = useState([]);
+   const [planes, setPlanes] = useState(() => {
+      const stored = localStorage.getItem('planes');
+      return stored ? JSON.parse(stored) : []; 
+   });
 
-   const [DZs, setDZs] = useState([]);
+   const [rigs, setRigs] = useState(() => {
+      const stored = localStorage.getItem('rigs');
+      return stored ? JSON.parse(stored) : []; 
+   });
+
+   const [DZs, setDZs] = useState(() => {
+      const stored = localStorage.getItem('DZs');
+      return stored ? JSON.parse(stored) : []; 
+   });
 
    //states
-
-   const [gotHistory, setGotHistory] = useState(false);
-
 
     const [router, setRouter] = useState({
       welcome: false,
@@ -78,73 +93,24 @@ function HomePage(props) {
 
    //getjumphistory post
 
-   const [userJumpHistory, setUserJumpHistory] = useState();
+   const [user, setUser] = useState(() => {
+      const stored = localStorage.getItem('user');
+      return stored ? JSON.parse(stored) : 'guest'; 
+   });
+
+   const [userJumpHistory, setUserJumpHistory] = useState(() => {
+      const stored = localStorage.getItem('userJumpHistory');
+      return stored ? JSON.parse(stored) : []; 
+   });
 
    const [userJumpCount, setUserJumpCount] = useState();
    
-
-   const getJumpHist = async () => { 
-      if (!gotHistory)
-         {setUserJumpHistory(null);
-         setUserJumpCount('loading...')
-         console.log('getting user jump history')
-         try {
-            const response = await fetch(`${svr}/userjumphistory`, {
-               method: 'POST',
-               headers: { 'Content-Type': 'application/json'},
-               body: JSON.stringify({user_id: user.ID}),
-            });
-            const data = await response.json();
-            if(data.ok){
-               let jumpHist = [];
-               for (let jump of data.results) {
-                  jumpHist.push(jump);
-               }
-               setUserJumpHistory(jumpHist);
-               setUserJumpCount(jumpHist.length);
-               setGotHistory(true);
-               // console.log('set user jump history')
-
-            }
-            else {
-               console.error('jumps not found', data)
-            }
-         } catch (err) {
-            console.error('client failed to load user jumps')
-         }}
-   }
-
-   const getUserData = async () => {
-    console.log('getting userdata')
-    try {
-      const response = await fetch(`${svr}/getuserinfo`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: user.ID}),
-      });
-      const data = await response.json();
-      if(response.ok){
-        setDefaultRig(data.rig);
-        setDefaultAircraft(data.aircraft);
-        setDefaultDZ(data.dz);
-        setRigs([...data.rigs]);
-        setPlanes([...data.planes])
-        setDZs([...data.dropzones])
-      } else{
-        console.error('no defaults retrieved', response);
-      }
-    } catch (err) {
-      console.error('client failed getting defaults', err);
-    }
-  }; 
    
 
    //handlers
 
    async function handleNavToLedg (e) {
-      e.preventDefault();
-      getJumpHist();
-      await getUserData();
+      e.preventDefault()
       setRouter({
       welcome: false,
       fullList: true,
@@ -155,9 +121,8 @@ function HomePage(props) {
       add: false
     })
    }
-   async function callLedg () {
-      getJumpHist();
-      await getUserData();
+   async function callLedg (e) {
+      e.preventDefault()
       setRouter({
       welcome: false,
       fullList: true,
@@ -169,9 +134,6 @@ function HomePage(props) {
     })
    }
    async function handleNavToStats (e) {
-      getJumpHist();
-      await getUserData();
-      e.preventDefault();
       setRouter({
       welcome: false,
       fullList: false,
@@ -182,9 +144,8 @@ function HomePage(props) {
       add: false
     })
    }
-   async function callStats () {
-      getJumpHist();
-      await getUserData();
+   async function callStats (e) {
+      e.preventDefault()
       setRouter({
       welcome: false,
       fullList: false,
@@ -196,8 +157,6 @@ function HomePage(props) {
     })
    }
    async function handleNavToDownload (e) {
-      getJumpHist();
-      await getUserData();
       e.preventDefault();
       setRouter({
       welcome: false,
@@ -210,8 +169,6 @@ function HomePage(props) {
     })
    }
    async function handleNavToSettings (e) {
-      getJumpHist();
-      await getUserData();
       e.preventDefault();
       setRouter({
       welcome: false,
@@ -223,13 +180,8 @@ function HomePage(props) {
       add: false
     });
    }
-   function handleLogout (e) {
-      e.preventDefault();
-      logout();
-    }
-    function handleSearch(e) {
 
-      setUserJumpHistory(null)
+    function handleSearch(e) {
       e.preventDefault();
       setWildCard(wcField);
       setRouter({
@@ -249,8 +201,6 @@ function HomePage(props) {
       setWcField(e.target.value)
     }
     async function handleNavToAdd(e) {
-      getJumpHist();
-      await getUserData();
       e.preventDefault();
       setRouter({
       welcome: false,
@@ -278,14 +228,6 @@ function HomePage(props) {
       padding: "1em",
       display: "flex",
       background: pallette[4],
-//       borderBottom: "solid .25em",
-//       borderColor: pallette[3],
-//       boxShadow: [
-//   "1em .5em 1em rgba(0,0,0,0.4)",   // darkest, tightest
-//   "1.5em .75em 1.5em rgba(0,0,0,0.3)",
-//   "2em 1em 2em rgba(0,0,0,0.2)",     // softer, more spread
-//   "4em 2em 4em rgba(0,0,0,0.1)"      // very light, wide fade
-// ].join(', '),
    }
    const headerBackground = {
       position: "fixed",
@@ -355,7 +297,7 @@ function HomePage(props) {
       background: pallette[4],
 
    }
-      const sidebarbacgroundStyle ={
+   const sidebarbacgroundStyle ={
       position: "fixed",
       height: "100%",
       top: "0",
@@ -387,7 +329,7 @@ function HomePage(props) {
 
 
    useEffect(() => {
-      (!router.searchedList) && getJumpHist();
+
       setRouter({
       welcome: true,
       fullList: false,
@@ -400,8 +342,8 @@ function HomePage(props) {
    }, [flag]);
 
    useEffect(() => {
-      getUserData();
-   }, [])
+      setUserJumpCount(userJumpHistory.length)
+   }, [userJumpHistory])
 
 
 
@@ -416,7 +358,7 @@ function HomePage(props) {
          <div style={headerStyle}>
 
             <div >
-               <p style={nameStyle}>{user.name.length > 20 ? user.name.slice(0, 20) : user.name }</p>
+               <p style={nameStyle}></p>
                <p style={jumpNumStyle}>{userJumpCount ? userJumpCount : userJumpCount !== 0 ? 'Loading...' : userJumpCount} Jumps</p>
             </div>
 
@@ -494,7 +436,7 @@ function HomePage(props) {
                </button>
                
                
-               <button style={logOutButton} onClick={handleLogout}>log out</button>
+               <button style={logOutButton} onClick={e => {e.preventDefault(); nav('/login')}}>log out</button>
 
             </div>
             
@@ -502,16 +444,16 @@ function HomePage(props) {
 
 
          <div style={mainPageArea}>
-            {(router.welcome && userJumpHistory) ? <WelcomePage user={user} jumps={userJumpHistory ? userJumpHistory :'loading...'} skip={callLedg} stats={callStats} rigs={[...rigs]} planes={planes} dzs={DZs} defaults={(defaultAircraft || defaultAircraft === null ) ? {plane: defaultAircraft, rig: defaultRig, dz: defaultDZ} : 'loading...'}/>:  checkIfTrue(router.welcome) && <LoadPage />}
+            {(router.welcome && userJumpHistory) ? <WelcomePage jumps={userJumpHistory ? userJumpHistory :'loading...'} skip={callLedg} stats={callStats} rigs={[...rigs]} planes={planes} dzs={DZs} defaults={(defaultAircraft || defaultAircraft === null ) ? {plane: defaultAircraft, rig: defaultRig, dz: defaultDZ} : 'loading...'}/> : checkIfTrue(router.welcome) && <LoadPage />}
             {(router.fullList && userJumpHistory) ? <FullJumpLedge rst={() => {getJumpHist()}} add={() => {setUserJumpCount(userJumpCount + 1)}} jumps={userJumpHistory} jump_num={userJumpCount} set_false={() => setGotHistory(false)} rigs={rigs.map(n => n.name)} planes={planes.map(n => n.name)} DZs={DZs.map(n => n.name)} defaults={(defaultAircraft || defaultAircraft === null ) ? {plane: defaultAircraft, rig: defaultRig, dz: defaultDZ} : 'loading...'} /> : checkIfTrue(router.fullList) && <LoadPage />}
 
-            {router.download ? <DownloadPage user={user} /> : null}
+            {router.download ? <DownloadPage /> : null}
 
-            {(router.stats && userJumpHistory) ? <StatsPage jumps={userJumpHistory} user={user} jump_num={userJumpCount} rigs={rigs} planes={planes} dzs={DZs} /> : checkIfTrue(router.stats) && <LoadPage />}
+            {(router.stats && userJumpHistory) ? <StatsPage jumps={userJumpHistory} jump_num={userJumpCount} rigs={rigs} planes={planes} dzs={DZs} /> : checkIfTrue(router.stats) && <LoadPage />}
 
-            {(router.settings && userJumpHistory) ? <SettingsPage user={user} jump_num={userJumpCount} jumps={userJumpHistory ? userJumpHistory : 'loading'} rst={() => getJumpHist()} set_false={() => setGotHistory(false)} rigs={rigs.map(rig => rig.name)} planes={planes.map(pl => pl.name)} DZs={DZs.map(dz => dz.name)} defaults={(defaultAircraft || defaultAircraft === null ) ? {plane: defaultAircraft, rig: defaultRig, dz: defaultDZ} : 'loading...'} /> : checkIfTrue(router.settings) && <LoadPage />}
+            {(router.settings && userJumpHistory) ? <SettingsPage user={user} jump_num={userJumpCount} jumps={userJumpHistory ? userJumpHistory : 'loading'} rst={() => {}} set_false={() => setGotHistory(false)} rigs={rigs.map(rig => rig.name)} planes={planes.map(pl => pl.name)} DZs={DZs.map(dz => dz.name)} defaults={(defaultAircraft || defaultAircraft === null ) ? {plane: defaultAircraft, rig: defaultRig, dz: defaultDZ} : 'loading...'} /> : checkIfTrue(router.settings) && <LoadPage />}
 
-            {router.searchedList ? <SearchedList user={user} wildCard={wildCard} flag={flag} jump_num={userJumpCount}/> : null}
+            {router.searchedList ? <SearchedList  wildCard={wildCard} flag={flag} jump_num={userJumpCount}/> : null}
 
             {router.add ? <div style={{display: "flex",justifyContent: "space-around", paddingLeft: "4em", marginTop: "3.25em", width: "100%"}}>
                <div style={{width: '75%'}}>

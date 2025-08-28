@@ -1,13 +1,11 @@
 import { getPallette } from "../logInputWidget";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/authContext";
 
 function RegisterPage () {
 
    const svr = import.meta.env.VITE_SVR_URL;
 
-   const { login } = useAuth();
 
    const nav = useNavigate();
 
@@ -69,7 +67,7 @@ function RegisterPage () {
 
       console.log('successful user register criterea');
 
-      createUser();
+      nav('/');
 
       
    }
@@ -122,83 +120,6 @@ function RegisterPage () {
       background: pallette[4],
       borderColor: pallette[1]
    }
-
-   //api
-
-   const handleLoginSuccess = (data) => {
-      login(data);
-      nav('/', {replace: true});
-
-   }
-
-
-  const handleLogin = async () => {
-    try {
-      const response = await fetch(`${svr}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: newUserName, password: newPassword }),
-      });
-
-      const contentType = response.headers.get('content-type');
-      let returnedData;
-      if (contentType && contentType.includes('application/json')) {
-        returnedData = await response.json();
-      } else {
-        returnedData = await response.text();
-      }
-
-      if (response.ok) {
-        
-        console.log('✅ Login successful, got token');
-        handleLoginSuccess({
-          token: returnedData.token,
-          user: returnedData.user
-        });
-      } else {
-        console.error('❌ Login failed:', returnedData);
-        alert(returnedData.error || returnedData.message || 'login failed')
-      }
-    } catch (err) {
-      console.error('🔥 Server error:', err);
-      alert('Cannot connect to server. Try again later.');
-    }
-  };
-
-   const createUser = async () => {
-    try {
-      const response = await fetch(`${svr}/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newUserName, email: newEmail, password: newPassword }),
-      });
-      const returnedDATA = await response.json();
-      if (response.ok) {
-        alert(returnedDATA.message);
-        timeout !== 0 ? askDB() : console.log('post timeout')
-      } else {alert(returnedDATA.message)}
-    } catch (err) {console.error('client failed storing DZ', err);}
-  };
-
-  const askDB = async () => {
-   setTimeOut(timeout - 1);
-   console.log('attempts left', timeout);
-   try {
-      const response = await fetch(`${svr}/askdbpos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newUserName, email: newEmail }),
-      });
-      const returnedDATA = await response.json();
-      if (response.ok) {
-        console.log(returnedDATA.message);
-        handleLogin();
-      } else {
-         console.log('client could not find user retrying...', returnedDATA.message);
-         askDB();
-      }
-   } catch (err) { {console.error('client failed storing DZ', err);} }
-  };
 
 
    return(
